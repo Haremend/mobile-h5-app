@@ -463,4 +463,38 @@ server: {
 9. ✅ **测试部署** - 验证功能完整性
 10. ✅ **外部提供** - 生成外部访问链接
 
-这个模板提供了完整的基础架构，你只需要按照业务需求进行内容替换和功能扩展即可。
+## 🔄 升级到 TypeScript
+
+虽然当前模板使用 JavaScript，但为未来升级到 TypeScript 预留了空间：
+
+### 🚀 快速升级路径：
+
+```bash
+# 1. 安装必要依赖
+npm install -D typescript @types/node @vitejs/plugin-vue
+
+# 2. 创建配置文件
+npx tsc --init
+
+# 3. 逐步转换文件
+# - 先将工具函数转换为 .ts
+# - 再转换 Store 和 API
+# - 最后转换组件
+```
+
+### 📁 建议的转换顺序：
+
+1. **配置文件** (`vite.config.js` → `vite.config.ts`)
+2. **工具函数** (`src/utils/*.js` → `src/utils/*.ts`)
+3. **类型定义** (创建 `src/types/` 目录)
+4. **Store 状态管理** (`src/stores/*.js` → `src/stores/*.ts`)
+5. **API 接口** (`src/api/**/*.js` → `src/api/**/*.ts`)
+6. **组件文件** (添加 `lang="ts"`)
+
+### 💡 升级建议：
+
+- **新项目**: 建议直接使用 TypeScript 模板
+- **现有项目**: 采用渐进式迁移，不影响现有功能
+- **团队规模**: 3 人以上团队推荐使用 TypeScript
+
+这个模板提供了完整的基础架构，你只需要按照业务需求进行内容替换和功能扩展即可。无论是保持 JavaScript 还是升级到 TypeScript，都能很好地支持你的开发需求。
