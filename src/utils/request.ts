@@ -1,17 +1,17 @@
-import axios from 'axios'
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 import { showToast } from 'vant'
 import { getToken, removeToken } from './auth'
 import router from '@/router'
 
-const service = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+const service: AxiosInstance = axios.create({
+  baseURL: (import.meta as any).env.VITE_API_BASE_URL || '/api',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' }
 })
 
 // 请求拦截器
 service.interceptors.request.use(
-  config => {
+  (config: InternalAxiosRequestConfig) => {
     const token = getToken()
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
@@ -68,9 +68,12 @@ service.interceptors.response.use(
 )
 
 // 快捷方法
-export const get = (url, params = {}) => service.get(url, { params })
-export const post = (url, data = {}) => service.post(url, data)
-export const put = (url, data = {}) => service.put(url, data)
-export const del = url => service.delete(url)
+export const get = (url: string, params: Record<string, any> = {}) =>
+  service.get(url, { params })
+export const post = (url: string, data: Record<string, any> = {}) =>
+  service.post(url, data)
+export const put = (url: string, data: Record<string, any> = {}) =>
+  service.put(url, data)
+export const del = (url: string) => service.delete(url)
 
 export default service

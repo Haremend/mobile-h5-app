@@ -78,11 +78,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * 首页
  * 展示轮播图、功能入口、商品推荐列表
  */
+import type { Product } from '@/types'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 // import { getRecommendList } from '@/api/modules/home'
@@ -90,7 +91,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 // 商品列表
-const productList = ref([])
+const productList = ref<Product[]>([])
 const loading = ref(false)
 const finished = ref(false)
 const page = ref(1)
@@ -109,12 +110,15 @@ const loadProducts = async () => {
     // const res = await getRecommendList(params)
 
     // 模拟商品数据
-    const mockData = Array.from({ length: pageSize.value }, (_, i) => ({
-      id: page.value * pageSize.value + i + 1,
-      title: `商品 ${page.value * pageSize.value + i + 1}`,
-      price: (Math.random() * 100 + 10).toFixed(2),
-      image: `https://picsum.photos/160/160?random=${page.value * pageSize.value + i + 1}`
-    }))
+    const mockData: Product[] = Array.from(
+      { length: pageSize.value },
+      (_, i) => ({
+        id: page.value * pageSize.value + i + 1,
+        title: `商品 ${page.value * pageSize.value + i + 1}`,
+        price: (Math.random() * 100 + 10).toFixed(2),
+        image: `https://picsum.photos/160/160?random=${page.value * pageSize.value + i + 1}`
+      })
+    )
 
     if (page.value === 1) {
       productList.value = mockData

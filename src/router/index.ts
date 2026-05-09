@@ -1,7 +1,7 @@
 /**
  * 路由配置
  */
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { isLoggedIn } from '@/utils/auth'
 
 // 路由懒加载
@@ -13,7 +13,7 @@ const Login = () => import('@/views/login/index.vue')
 const Detail = () => import('@/views/detail/index.vue')
 const NotFound = () => import('@/views/404/index.vue')
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
@@ -99,9 +99,10 @@ const router = createRouter({
 })
 
 // 全局前置守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   // 设置页面标题
-  document.title = to.meta.title || import.meta.env.VITE_APP_TITLE
+  document.title =
+    (to.meta.title as string) || (import.meta as any).env.VITE_APP_TITLE
 
   // 需要登录但未登录 -> 跳转登录页，记录 redirect
   if (to.meta.requiresAuth && !isLoggedIn()) {

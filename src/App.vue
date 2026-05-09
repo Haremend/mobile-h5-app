@@ -12,13 +12,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * 根组件
  * 负责全局 loading 和路由视图
  */
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import type { RouteLocationNormalized } from 'vue-router'
 import { useAppStore } from '@/stores/app'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
@@ -29,7 +30,7 @@ const appStore = useAppStore()
 const cachedViews = computed(() => {
   // 这里可以根据需要动态获取需要缓存的页面
   // 目前先返回空数组，实际使用中可以通过路由 meta 配置
-  return []
+  return [] as string[]
 })
 </script>
 

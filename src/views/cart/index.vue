@@ -92,20 +92,29 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * 购物车页
  * 商品列表、数量调整、结算功能
  */
+import type { Ref } from 'vue'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showDialog } from 'vant'
 import EmptyState from '@/components/EmptyState.vue'
 
+interface CartItem {
+  id: number
+  title: string
+  price: string
+  quantity: number
+  image?: string
+}
+
 const router = useRouter()
 
 // 购物车商品列表
-const cartList = ref([
+const cartList = ref<CartItem[]>([
   {
     id: 1,
     title: '商品标题1 - 这是一个很长的商品标题用于测试显示效果',
@@ -130,10 +139,10 @@ const cartList = ref([
 ])
 
 // 已选择的商品ID列表
-const checkedList = ref([])
+const checkedList = ref<number[]>([])
 
 // 复选框组引用
-const checkboxGroup = ref(null)
+const checkboxGroup = ref<Ref | null>(null)
 
 // 计算总价
 const totalPrice = computed(() => {
@@ -162,7 +171,7 @@ const onQuantityChange = item => {
 }
 
 // 删除商品
-const removeItem = item => {
+const removeItem = (item: CartItem) => {
   showDialog({
     title: '确认删除',
     message: `确定要删除商品「${item.title}」吗？`,

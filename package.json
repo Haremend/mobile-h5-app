@@ -7,29 +7,35 @@
     "build": "vite build",
     "build:staging": "vite build --mode staging",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js --fix"
+    "lint": "eslint . --ext .vue,.ts,.js --fix",
+    "lint:ts": "tsc --noEmit"
   },
   "dependencies": {
-    "vue": "^3.4.0",
-    "vue-router": "^4.3.0",
+    "amfe-flexible": "^2.2.1",
+    "axios": "^1.6.0",
+    "dayjs": "^1.11.0",
+    "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
     "vant": "^4.9.0",
-    "axios": "^1.6.0",
-    "amfe-flexible": "^2.2.1",
-    "dayjs": "^1.11.0",
-    "lodash-es": "^4.17.21"
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.0.0",
-    "postcss-pxtorem": "^6.1.0",
-    "autoprefixer": "^10.4.0",
-    "unplugin-vue-components": "^0.26.0",
+    "@tsconfig/node20": "^20.1.9",
+    "@types/node": "^25.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
     "@vant/auto-import-resolver": "^1.0.2",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "autoprefixer": "^10.4.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.0.0",
+    "postcss-pxtorem": "^6.1.0",
     "prettier": "^3.0.0",
-    "@vue/eslint-config-prettier": "^9.0.0"
+    "typescript": "^6.0.3",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"

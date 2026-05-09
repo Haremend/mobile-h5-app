@@ -4,10 +4,13 @@
 
 /**
  * 获取存储数据
- * @param {string} key 键名
- * @param {any} defaultValue 默认值
+ * @param key 键名
+ * @param defaultValue 默认值
  */
-export const getStorage = (key, defaultValue = null) => {
+export const getStorage = <T = any>(
+  key: string,
+  defaultValue: T | null = null
+): T | null => {
   try {
     const item = localStorage.getItem(key)
     return item ? JSON.parse(item) : defaultValue
@@ -19,10 +22,10 @@ export const getStorage = (key, defaultValue = null) => {
 
 /**
  * 设置存储数据
- * @param {string} key 键名
- * @param {any} value 值
+ * @param key 键名
+ * @param value 值
  */
-export const setStorage = (key, value) => {
+export const setStorage = <T>(key: string, value: T): void => {
   try {
     localStorage.setItem(key, JSON.stringify(value))
   } catch (error) {
@@ -32,9 +35,9 @@ export const setStorage = (key, value) => {
 
 /**
  * 移除存储数据
- * @param {string} key 键名
+ * @param key 键名
  */
-export const removeStorage = key => {
+export const removeStorage = (key: string): void => {
   try {
     localStorage.removeItem(key)
   } catch (error) {
@@ -45,7 +48,7 @@ export const removeStorage = key => {
 /**
  * 清空所有存储数据
  */
-export const clearStorage = () => {
+export const clearStorage = (): void => {
   try {
     localStorage.clear()
   } catch (error) {

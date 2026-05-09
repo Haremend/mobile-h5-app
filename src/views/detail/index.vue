@@ -91,7 +91,7 @@
           <span class="action-text">购物车</span>
           <van-badge
             v-if="cartCount > 0"
-            :content="cartCount"
+            :content="String(cartCount)"
             class="cart-badge"
           />
         </div>
@@ -125,11 +125,11 @@
   </div>
 </template>
 
-<script setup>
-/**
+<script setup lang="ts">n/**
  * 商品详情页
  * 展示商品图片、信息、详情、相关推荐
  */
+import type { Product } from '@/types'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast } from 'vant'
@@ -139,11 +139,15 @@ const router = useRouter()
 
 // 商品ID
 const route = useRoute()
-const productId = route.params.id
+const productId = Number(route.params.id)
 
 // 商品信息
-const product = ref({
-  id: productId,
+const product = ref<Product & {
+  subtitle?: string
+  images?: string[]
+  description?: string
+}>({
+  id: Number(productId),
   title: '商品标题',
   subtitle: '商品副标题描述',
   price: '199.90',
@@ -173,7 +177,7 @@ const product = ref({
 })
 
 // 推荐商品列表
-const recommendList = ref([
+const recommendList = ref<Product[]>([
   {
     id: 1,
     title: '推荐商品1',
@@ -216,7 +220,7 @@ const goToCart = () => {
 }
 
 // 跳转到其他商品详情
-const goToDetail = id => {
+const goToDetail = (id: number) => {
   if (id !== productId) {
     router.push(`/detail/${id}`)
   }

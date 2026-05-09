@@ -69,11 +69,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * 登录页
  * 用户登录表单
  */
+import type { FormInstance } from 'vant'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast } from 'vant'
@@ -98,7 +99,7 @@ const form = ref({
 const phonePattern = /^1[3-9]\d{9}$/
 
 // 表单引用
-const formRef = ref(null)
+const formRef = ref<FormInstance | null>(null)
 
 // 加载状态
 const loading = ref(false)

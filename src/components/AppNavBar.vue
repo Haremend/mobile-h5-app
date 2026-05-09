@@ -18,45 +18,37 @@
   </van-nav-bar>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: ''
-  },
-  showLeftArrow: {
-    type: Boolean,
-    default: true
-  },
-  rightText: {
-    type: String,
-    default: ''
-  },
-  fixed: {
-    type: Boolean,
-    default: true
-  },
-  placeholder: {
-    type: Boolean,
-    default: true
-  },
-  border: {
-    type: Boolean,
-    default: true
-  }
+interface Props {
+  title?: string
+  showLeftArrow?: boolean
+  rightText?: string
+  fixed?: boolean
+  placeholder?: boolean
+  border?: boolean
+}
+
+withDefaults(defineProps<Props>(), {
+  title: '',
+  showLeftArrow: true,
+  rightText: '',
+  fixed: true,
+  placeholder: true,
+  border: true
 })
 
-const emit = defineEmits(['click-left', 'click-right'])
+const emit = defineEmits<{
+  'click-left': []
+  'click-right': []
+}>()
 const router = useRouter()
 
 const onClickLeft = () => {
   emit('click-left')
   // 默认返回上一页
-  if (!event.defaultPrevented) {
-    router.back()
-  }
+  router.back()
 }
 
 const onClickRight = () => {

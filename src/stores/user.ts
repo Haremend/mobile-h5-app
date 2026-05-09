@@ -3,6 +3,7 @@
  */
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import type { User } from '@/types'
 import {
   setToken,
   getToken,
@@ -15,14 +16,14 @@ import router from '@/router'
 
 export const useUserStore = defineStore('user', () => {
   // 状态
-  const userInfo = ref(getUser())
-  const token = ref(getToken())
+  const userInfo = ref<User | null>(getUser())
+  const token = ref<string | null>(getToken())
 
   // 计算属性
   const isLoggedIn = computed(() => !!token.value)
 
   // 登录
-  const login = data => {
+  const login = (data: { token: string; user: User }) => {
     const { token: newToken, user } = data
     token.value = newToken
     userInfo.value = user
@@ -40,8 +41,8 @@ export const useUserStore = defineStore('user', () => {
   }
 
   // 更新用户信息
-  const updateUserInfo = data => {
-    userInfo.value = { ...userInfo.value, ...data }
+  const updateUserInfo = (data: Partial<User>) => {
+    userInfo.value = { ...userInfo.value, ...data } as User
     setUser(userInfo.value)
   }
 

@@ -6,23 +6,23 @@ import { ref } from 'vue'
 
 export const useAppStore = defineStore('app', () => {
   // 全局 loading 状态
-  const loading = ref(false)
+  const loading = ref<boolean>(false)
 
   // 当前页面标题
-  const pageTitle = ref('')
+  const pageTitle = ref<string>('')
 
   // 显示 loading
-  const showLoading = () => {
+  const showLoading = (): void => {
     loading.value = true
   }
 
   // 隐藏 loading
-  const hideLoading = () => {
+  const hideLoading = (): void => {
     loading.value = false
   }
 
   // 设置页面标题
-  const setPageTitle = title => {
+  const setPageTitle = (title: string): void => {
     pageTitle.value = title
   }
 

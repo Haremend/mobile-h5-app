@@ -64,20 +64,26 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * 分类页
  * 左侧分类列表，右侧商品展示
  */
+import type { Product } from '@/types'
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 // import { getCategoryList, getProductList } from '@/api/modules/home'
 import EmptyState from '@/components/EmptyState.vue'
 
+interface Category {
+  id: number
+  name: string
+}
+
 const router = useRouter()
 
 // 分类列表
-const categoryList = ref([
+const categoryList = ref<Category[]>([
   { id: 1, name: '推荐' },
   { id: 2, name: '手机数码' },
   { id: 3, name: '服装鞋帽' },
@@ -95,7 +101,7 @@ const activeCategory = ref(0)
 const currentCategory = computed(() => categoryList.value[activeCategory.value])
 
 // 商品列表
-const productList = ref([])
+const productList = ref<Product[]>([])
 
 // 加载商品数据
 const loadProducts = async () => {
@@ -108,7 +114,7 @@ const loadProducts = async () => {
     // }
 
     // 模拟商品数据
-    const mockData = Array.from({ length: 8 }, (_, i) => ({
+    const mockData: Product[] = Array.from({ length: 8 }, (_, i) => ({
       id: categoryId * 100 + i + 1,
       title: `${currentCategory.value?.name || '商品'} ${i + 1}`,
       price: (Math.random() * 200 + 20).toFixed(2),
@@ -127,7 +133,7 @@ const onCategoryChange = () => {
 }
 
 // 跳转到详情页
-const goToDetail = id => {
+const goToDetail = (id: number) => {
   router.push(`/detail/${id}`)
 }
 
