@@ -7,7 +7,7 @@
 - **框架**: Vue 3.4+
 - **构建工具**: Vite 5.0+
 - **状态管理**: Pinia
-- **路由**: Vue Router 4
+- **路由**: Vue Router 4（HTML5 History 模式，无 # 号路由）
 - **UI 组件库**: Vant 4（移动端专用）
 - **HTTP 请求**: Axios
 - **移动端适配**: amfe-flexible + postcss-pxtorem

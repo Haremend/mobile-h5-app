@@ -8,6 +8,40 @@
 
 这是一个完整的模板重构流程，分为以下几个步骤：
 
+> 💡 **路由模式说明**：本模板默认使用 HTML5 History 模式（无 # 号路由），URL 更美观，适合现代 H5 应用开发。
+
+## 🚦 第零步：了解路由模式
+
+### 0.1 当前路由配置
+
+本模板默认使用 **HTML5 History 模式**（无 # 号路由）：
+
+```javascript
+// src/router/index.js
+const router = createRouter({
+  history: createWebHistory(), // 无 # 号路由
+  routes
+})
+```
+
+### 0.2 URL 格式对比
+
+| 路由模式 | 示例 URL | 特点 |
+|---------|---------|------|
+| Hash 模式 | `https://domain.com/#/path` | 兼容性好，但 URL 不够美观 |
+| History 模式 | `https://domain.com/path` | URL 简洁，现代 H5 应用推荐 |
+
+### 0.3 服务器配置要求
+
+使用 History 模式需要服务器支持，确保所有路由都指向 `index.html`：
+
+```nginx
+# Nginx 配置示例
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
 ## 🔄 第一步：基础配置修改
 
 ### 1.1 修改项目基本信息
@@ -168,6 +202,8 @@ const routes = [
 
 ## 🔗 第四步：支持外部链接访问
 
+> 💡 **路由模式优势**：使用 HTML5 History 模式（无 # 号），URL 更简洁美观，适合嵌入到微信小程序等外部应用中。
+
 ### 4.1 创建独立页面（用于外部嵌入）
 ```bash
 # 创建可在外部访问的独立页面
@@ -269,13 +305,13 @@ export const getGalleryImages = (category) => get('/gallery', { category })
 
 ### 6.1 URL 设计规范
 ```
-# 内部页面访问
-https://your-domain.com/#/attractions
-https://your-domain.com/#/attraction/123
+# 内部页面访问（无 # 号路由）
+https://your-domain.com/attractions
+https://your-domain.com/attraction/123
 
-# 外部嵌入页面（无导航）
-https://your-domain.com/#/external/attraction/123
-https://your-domain.com/#/external/culture/456
+# 外部嵌入页面（无导航，无 # 号路由）
+https://your-domain.com/external/attraction/123
+https://your-domain.com/external/culture/456
 ```
 
 ### 6.2 添加页面参数支持
@@ -374,8 +410,8 @@ npm install
 # 启动开发环境
 npm run dev
 
-# 测试外部链接
-http://localhost:3000/#/external/attraction/1
+# 测试外部链接（无 # 号路由）
+http://localhost:3000/external/attraction/1
 ```
 
 ### 9.2 生产构建
@@ -391,12 +427,12 @@ npm run preview
 
 ### 10.1 生成外部访问链接
 ```
-# 微信小程序或其他应用调用
-https://your-domain.com/dist/#/external/attraction/123
-https://your-domain.com/dist/#/external/culture/456
+# 微信小程序或其他应用调用（无 # 号路由）
+https://your-domain.com/external/attraction/123
+https://your-domain.com/external/culture/456
 
 # 带参数传递
-https://your-domain.com/dist/#/external/attraction/123?source=wechat&theme=dark
+https://your-domain.com/external/attraction/123?source=wechat&theme=dark
 ```
 
 ### 10.2 配置 CORS（如果需要）
