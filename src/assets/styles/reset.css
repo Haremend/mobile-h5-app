@@ -1,0 +1,24 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent; /* 去除移动端点击高亮 */
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+#app {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+/* 页面内容区留出 TabBar 底部空间 */
+.page-content {
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--tabbar-height) + var(--safe-area-bottom));
+}

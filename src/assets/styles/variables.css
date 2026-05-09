@@ -1,0 +1,48 @@
+:root {
+  /* 主题色 */
+  --color-primary: #1989fa;
+  --color-primary-light: #ecf5ff;
+  --color-danger: #ee0a24;
+  --color-success: #07c160;
+  --color-warning: #ff976a;
+
+  /* 文字色 */
+  --color-text-primary: #323233;
+  --color-text-regular: #646566;
+  --color-text-secondary: #969799;
+  --color-text-placeholder: #c8c9cc;
+
+  /* 背景色 */
+  --color-bg-primary: #ffffff;
+  --color-bg-page: #f7f8fa;
+  --color-bg-card: #ffffff;
+
+  /* 边框 */
+  --color-border: #ebedf0;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  /* 间距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* 字体大小 */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+
+  /* TabBar 高度 */
+  --tabbar-height: 50px;
+
+  /* NavBar 高度 */
+  --navbar-height: 46px;
+
+  /* 安全区域（刘海屏适配） */
+  --safe-area-bottom: env(safe-area-inset-bottom);
+}
